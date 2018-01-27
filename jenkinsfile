@@ -4,7 +4,7 @@ checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleC
 echo 'test build'
 stage('build')
 if (Stage in ["build"]){
-    sh 'mvn clean install'
+   sh 'mvn clean install'
 }
 stage('archive')
 archiveArtifacts '**/target/*.war'
