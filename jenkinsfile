@@ -2,9 +2,9 @@ node('Linux'){
 stage 'scm-checkout'
 checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/deepakbhattarai/maven-project.git']]])
 echo 'test build'
+stage 'build'{
 if(env == 'build'){
-    stage('build'){
-    sh 'mvn clean install'
+   sh 'mvn clean install'
 }}
 stage 'archive'
 archiveArtifacts '**/target/*.war'
