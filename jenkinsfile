@@ -10,10 +10,13 @@ pipeline {
                   }
         }
         stage('build'){
-                //if (Stage in ["build", "dev"])
-                steps {
-                        sh 'mvn clean install'
-                }
+		steps {                
+                	scripts {
+			if (Stage in ["build", "dev"])
+                        	sh 'mvn clean install'
+               		 }
+		}
+		}
         }
         stage('archive'){
                 steps {
