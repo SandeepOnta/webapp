@@ -13,7 +13,7 @@ pipeline {
     }
     stage('build') {
       steps {
-        sh 'mvn clean install'
+        sh 'mvn -f CounterWebApp/pom.xml clean install'
       }
     }
     stage('archive') {
