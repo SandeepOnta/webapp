@@ -1,7 +1,7 @@
 pipeline {
     agent {label "Linux"}
     parameters{
-	choice(choices: 'build\ndev\nqa',name:Stage)
+	choice(choices: 'build\ndev\nqa',name:'Stage')
 	}
 	stages {    
     	stage('scm-checkout') {
