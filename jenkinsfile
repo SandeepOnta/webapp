@@ -1,23 +1,23 @@
 pipeline {
     agent {label "Linux"}
-    parameters{
-	choice(choices: 'build\ndev\nqa',name:'Stage')
+    parameters {
+	choice(choices: 'build\ndev\nqa',name:'Stage')  
 	}
-	stages {    
-    	stage('scm-checkout') {
+	stages {
+        stage('scm-checkout') {
                 steps {
                         checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/deepakbhattarai/maven-project.git']]])
                   }
         }
         stage('build'){
-		steps {                
-                	scripts {
-			if (Stage in ["build", "dev"])
-                        	sh 'mvn clean install'
-               		 }
-		}
-		}
-        }
+				steps {
+					scripts {
+						if (Stage in ["build", "dev"]){		                
+							sh 'mvn clean install'
+						}
+					}
+				}
+			}
         stage('archive'){
                 steps {
                         archiveArtifacts '**/target/*.war'
@@ -25,7 +25,7 @@ pipeline {
         }
         stage('deploy'){
                 steps {
-			echo 'deploying war files to this files'
+					echo 'deploying war file'
                 }
         }
 	}
