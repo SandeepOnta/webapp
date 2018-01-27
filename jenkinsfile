@@ -3,7 +3,7 @@ stage('scm-checkout')
 checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/deepakbhattarai/maven-project.git']]])
 echo 'test build'
 stage('build')
-if (Stage in ["build"]){
+if (Stage in ["build", "dev"]){
    sh 'mvn clean install'
 }
 stage('archive')
