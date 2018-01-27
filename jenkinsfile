@@ -5,9 +5,9 @@ pipeline {
             checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/deepakbhattarai/maven-project.git']]])                
                   }
 	stage('build'){
-		if (Stage in ["build", "dev"]){
+		//if (Stage in ["build", "dev"]){
    		sh 'mvn clean install'
-        	}
+        
 	}
 	stage('archive'){
 		archiveArtifacts '**/target/*.war'
