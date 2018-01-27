@@ -2,18 +2,27 @@ pipeline {
     agent {label "Linux"}
     stages {
         stage('scm-checkout') {
-            checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/deepakbhattarai/maven-project.git']]])                
+                steps {
+                        checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/deepakbhattarai/maven-project.git']]])
                   }
-	stage('build'){
-		//if (Stage in ["build", "dev"]){
-   		sh 'mvn clean install'
-        
+        }
+        stage('build'){
+                //if (Stage in ["build", "dev"])
+                steps {
+                        sh 'mvn clean install'
+                }
+        }
+        stage('archive'){
+                steps {
+                        archiveArtifacts '**/target/*.war'
+            }
+        }
+        stage('deploy'){
+                steps {
+					echo 'deploying war file'
+                }
+        }
 	}
-	stage('archive'){
-		archiveArtifacts '**/target/*.war'
-	    }
-	stage('deploy'){
-		echo 'deploying war file'
-		}
-	}
+}
+
 }
