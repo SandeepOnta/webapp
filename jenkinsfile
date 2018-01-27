@@ -11,7 +11,7 @@ pipeline {
         }
         stage('build'){
 				steps {
-					scripts {
+					script {
 						if (Stage in ["build", "dev"]){		                
 							sh 'mvn clean install'
 						}
