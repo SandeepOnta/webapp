@@ -1,5 +1,10 @@
 pipeline {
-  agent any
+  agent {
+    node {
+      label 'Linux'
+    }
+    
+  }
   stages {
     stage('scm-checkout') {
       steps {
